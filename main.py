@@ -2,7 +2,7 @@ import os
 import requests
 import pandas as pd
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timezone
 
 CSV_PATH = "data/crypto_data.csv"
 DB_PATH = "database/crypto.db"
@@ -61,7 +61,7 @@ def main():
     if df.empty:
         print("[x] Nothing pulled.")
         return
-    print(f"[✓] Data pulled @ {datetime.utcnow().isoformat()}")
+    print(f"[✓] Data pulled @ {datetime.now(timezone.utc).isoformat()}")
     dump_csv(df)
     dump_sqlite(df)
     print("[✓] Done.")
